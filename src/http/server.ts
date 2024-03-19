@@ -4,12 +4,14 @@ import { fastify } from 'fastify'
 import { createProject } from './routes/create-project.js'
 import { createTodo } from './routes/create-todo.js'
 import { createUser } from './routes/create-user.js'
+import { authenticate } from './routes/send-auth-link.js'
 
 export const server = fastify()
 
 server.register(createUser)
 server.register(createProject)
 server.register(createTodo)
+server.register(authenticate)
 
 const start = async () => {
   try {

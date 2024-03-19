@@ -3,8 +3,8 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "name": "John Doe",
-    "email": "johndoe@example.com"
+    "name": "John Doee",
+    "email": "johndoee@example.com"
 }
 
 ### Create a project
@@ -24,4 +24,12 @@ Content-Type: application/json
     "title": "My first todo",
     "userId": 1,
     "projectId": 2
+}
+
+### Authenticate
+POST http://localhost:3000/authenticate
+Content-Type: application/json
+
+{
+    "email": "peter@prisma.io"
 }
