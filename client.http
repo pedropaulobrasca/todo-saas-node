@@ -1,0 +1,27 @@
+### Create a user
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "johndoe@example.com"
+}
+
+### Create a project
+POST http://localhost:3000/projects
+Content-Type: application/json
+
+{
+    "title": "My first project",
+    "userId": 1
+}
+
+### Create a todo
+POST http://localhost:3000/todos
+Content-Type: application/json
+
+{
+    "title": "My first todo",
+    "userId": 1,
+    "projectId": 2
+}
