@@ -33,10 +33,13 @@ export async function AuthenticateFromLink(server: FastifyInstance) {
         userId: authLinkFromCode.userId,
       })
 
+      // primeiro apaga o cookie
+      reply.clearCookie('auth')
+
+      // depois seta o novo cookie do jeito certo salvando realmente
       reply.setCookie('auth', token, {
         maxAge: 60 * 60 * 24 * 7,
         path: '/',
-        httpOnly: true,
       })
 
       await prisma.authLink.delete({
@@ -45,8 +48,8 @@ export async function AuthenticateFromLink(server: FastifyInstance) {
         },
       })
 
-      console.log(chalk.yellow(`Redirect user to: ${redirect}`))
-      reply.redirect(redirect)
+      console.log(chalk.cyan(`Redirect user to: ${redirect}`))
+      // reply.redirect(redirect)
     } catch (error) {
       reply.status(400).send({ error })
     }

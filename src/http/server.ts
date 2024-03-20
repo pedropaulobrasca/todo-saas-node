@@ -7,6 +7,7 @@ import { AuthenticateFromLink } from './routes/authenticate-from-link.ts'
 import { CreateProject } from './routes/create-project.ts'
 import { CreateTodo } from './routes/create-todo.ts'
 import { CreateUser } from './routes/create-user.ts'
+import { GetProfile } from './routes/get-profile.ts'
 import { Authenticate } from './routes/send-auth-link.ts'
 import { SignOut } from './routes/sign-out.ts'
 
@@ -24,6 +25,11 @@ server.register(CreateTodo)
 server.register(Authenticate)
 server.register(AuthenticateFromLink)
 server.register(SignOut)
+server.register(GetProfile)
+
+server.get('/', async (request, reply) => {
+  reply.send({ hello: 'world' })
+})
 
 const start = async () => {
   try {
