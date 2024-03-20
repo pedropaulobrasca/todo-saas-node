@@ -1,9 +1,9 @@
 import { FastifyInstance } from 'fastify'
 
-import { prisma } from '../../lib/prisma.js'
-import { TodoSchema } from '../../schemas/todo-schema.js'
+import { prisma } from '../../lib/prisma.ts'
+import { TodoSchema } from '../../schemas/todo-schema.ts'
 
-export async function createTodo(server: FastifyInstance) {
+export async function CreateTodo(server: FastifyInstance) {
   server.post('/todos', async (request, reply) => {
     try {
       const { title, userId, projectId } = TodoSchema.parse(request.body)

@@ -33,3 +33,6 @@ Content-Type: application/json
 {
     "email": "peter@prisma.io"
 }
+
+### Authenticate from link
+GET http://localhost:3000/auth-links/authenticate?code=kd7twxct5jhx92hymey2te2z&redirect=google.com.br

@@ -1,11 +1,12 @@
+import { createId } from '@paralleldrive/cuid2'
 import chalk from 'chalk'
 import { FastifyInstance } from 'fastify'
 
-import { env } from '../../env.js'
-import { prisma } from '../../lib/prisma.js'
-import { AuthenticateSchema } from '../../schemas/authenticate-schema.js'
+import { env } from '../../env.ts'
+import { prisma } from '../../lib/prisma.ts'
+import { AuthenticateSchema } from '../../schemas/authenticate-schema.ts'
 
-export async function authenticate(server: FastifyInstance) {
+export async function Authenticate(server: FastifyInstance) {
   server.post('/authenticate', async (request, reply) => {
     try {
       const { email } = AuthenticateSchema.parse(request.body)
@@ -18,11 +19,10 @@ export async function authenticate(server: FastifyInstance) {
       })
 
       if (!userFromEmail) {
-        reply.status(404).send({ error: 'User not found' })
-        return
+        throw new Error('User not found')
       }
 
-      const authLinkCode = crypto.randomUUID()
+      const authLinkCode = createId()
 
       await prisma.authLink.create({
         data: {

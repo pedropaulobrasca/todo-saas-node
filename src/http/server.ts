@@ -1,17 +1,27 @@
+import { fastifyCookie } from '@fastify/cookie'
+import { fastifyJwt } from '@fastify/jwt'
 import chalk from 'chalk'
 import { fastify } from 'fastify'
 
-import { createProject } from './routes/create-project.js'
-import { createTodo } from './routes/create-todo.js'
-import { createUser } from './routes/create-user.js'
-import { authenticate } from './routes/send-auth-link.js'
+import { AuthenticateFromLink } from './routes/authenticate-from-link.ts'
+import { CreateProject } from './routes/create-project.ts'
+import { CreateTodo } from './routes/create-todo.ts'
+import { CreateUser } from './routes/create-user.ts'
+import { Authenticate } from './routes/send-auth-link.ts'
 
 export const server = fastify()
 
-server.register(createUser)
-server.register(createProject)
-server.register(createTodo)
-server.register(authenticate)
+server.register(fastifyJwt, {
+  secret: 'mysecret', // env.JWT_SECRET_KEY (is not working and i dont know why...)
+})
+
+server.register(fastifyCookie)
+
+server.register(CreateUser)
+server.register(CreateProject)
+server.register(CreateTodo)
+server.register(Authenticate)
+server.register(AuthenticateFromLink)
 
 const start = async () => {
   try {

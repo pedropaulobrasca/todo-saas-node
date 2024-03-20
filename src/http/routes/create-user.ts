@@ -1,9 +1,9 @@
 import { FastifyInstance } from 'fastify'
 
-import { prisma } from '../../lib/prisma.js'
-import { UserSchema } from '../../schemas/user-schema.js'
+import { prisma } from '../../lib/prisma.ts'
+import { UserSchema } from '../../schemas/user-schema.ts'
 
-export async function createUser(server: FastifyInstance) {
+export async function CreateUser(server: FastifyInstance) {
   server.post('/users', async (request, reply) => {
     try {
       const { name, email } = UserSchema.parse(request.body)
