@@ -8,6 +8,7 @@ import { CreateProject } from './routes/create-project.ts'
 import { CreateTodo } from './routes/create-todo.ts'
 import { CreateUser } from './routes/create-user.ts'
 import { Authenticate } from './routes/send-auth-link.ts'
+import { SignOut } from './routes/sign-out.ts'
 
 export const server = fastify()
 
@@ -22,6 +23,7 @@ server.register(CreateProject)
 server.register(CreateTodo)
 server.register(Authenticate)
 server.register(AuthenticateFromLink)
+server.register(SignOut)
 
 const start = async () => {
   try {
