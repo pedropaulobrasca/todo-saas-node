@@ -9,8 +9,8 @@ import { CreateProject } from './routes/create-project.ts'
 import { CreateTodo } from './routes/create-todo.ts'
 import { CreateUser } from './routes/create-user.ts'
 import { GetProfile } from './routes/get-profile.ts'
-import { GetProjectByLoggedUser } from './routes/get-projects-by-logged-user.ts'
-import { GetTodosByLoggedUser } from './routes/get-todos-by-logged-user.ts'
+import { GetProjectByUserId } from './routes/get-projects-by-user-id.ts'
+import { GetTodoByUserId } from './routes/get-todos-by-user-id.ts'
 import { Authenticate } from './routes/send-auth-link.ts'
 import { SignOut } from './routes/sign-out.ts'
 
@@ -18,7 +18,6 @@ export const server = fastify()
 
 server.register(fastifyCors, {
   origin: '*',
-  credentials: true,
 })
 
 server.register(fastifyJwt, {
@@ -34,8 +33,8 @@ server.register(Authenticate)
 server.register(AuthenticateFromLink)
 server.register(SignOut)
 server.register(GetProfile)
-server.register(GetProjectByLoggedUser)
-server.register(GetTodosByLoggedUser)
+server.register(GetProjectByUserId)
+server.register(GetTodoByUserId)
 
 server.get('/', async (request, reply) => {
   reply.send({ hello: 'world' })

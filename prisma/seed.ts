@@ -28,6 +28,8 @@ async function main() {
       title: 'My first todo',
       projectId: project.id,
       userId: peter.id,
+      status: 'idle',
+      description: 'My first todo description',
     },
   })
 

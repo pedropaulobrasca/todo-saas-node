@@ -26,14 +26,23 @@ model User {
 }
 
 model Todo {
-  id        Int      @id @default(autoincrement())
-  title     String
-  userId    Int
-  projectId Int
-  createdAt DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  status      Status   @default(idle)
+  userId      Int
+  projectId   Int
+  createdAt   DateTime @default(now())
 
   user    User    @relation(fields: [userId], references: [id])
   project Project @relation(fields: [projectId], references: [id])
+}
+
+// Adicionado enum para status
+enum Status {
+  processing
+  completed
+  idle
 }
 
 model Project {
