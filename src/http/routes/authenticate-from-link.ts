@@ -1,4 +1,3 @@
-import chalk from 'chalk'
 import dayjs from 'dayjs'
 import { FastifyInstance } from 'fastify'
 
@@ -48,8 +47,7 @@ export async function AuthenticateFromLink(server: FastifyInstance) {
         },
       })
 
-      console.log(chalk.cyan(`Redirect user to: ${redirect}`))
-      // reply.redirect(redirect)
+      reply.redirect(redirect)
     } catch (error) {
       reply.status(400).send({ error })
     }

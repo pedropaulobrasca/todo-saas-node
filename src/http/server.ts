@@ -1,4 +1,5 @@
 import { fastifyCookie } from '@fastify/cookie'
+import { fastifyCors } from '@fastify/cors'
 import { fastifyJwt } from '@fastify/jwt'
 import chalk from 'chalk'
 import { fastify } from 'fastify'
@@ -14,6 +15,11 @@ import { Authenticate } from './routes/send-auth-link.ts'
 import { SignOut } from './routes/sign-out.ts'
 
 export const server = fastify()
+
+server.register(fastifyCors, {
+  origin: '*',
+  credentials: true,
+})
 
 server.register(fastifyJwt, {
   secret: 'mysecret', // env.JWT_SECRET_KEY (is not working and i dont know why...)
