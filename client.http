@@ -1,21 +1,3 @@
-### Create a user
-POST http://localhost:3000/users
-Content-Type: application/json
-
-{
-    "name": "John Doee",
-    "email": "johndoee@example.com"
-}
-
-### Create a project
-POST http://localhost:3000/projects
-Content-Type: application/json
-
-{
-    "title": "My first project",
-    "userId": 1
-}
-
 ### Create a todo
 POST http://localhost:3000/todos
 Content-Type: application/json
@@ -25,18 +7,3 @@ Content-Type: application/json
     "userId": 1,
     "projectId": 2
 }
-
-### Authenticate
-POST http://localhost:3000/authenticate
-Content-Type: application/json
-
-{
-    "email": "johndoe@example.com"
-}
-
-### Authenticate from link
-GET http://localhost:3000/auth-links/authenticate?code=yfkkz0hma3o6xa3btzg6jwp5&redirect=http%3A%2F%2Flocalhost%3A3000
-
-
-### Get user profile
-GET http://localhost:3000/me

@@ -8,6 +8,30 @@ export async function CreateTodo(server: FastifyInstance) {
     try {
       const { title, userId, projectId } = TodoSchema.parse(request.body)
 
+      const user = await prisma.user.findUnique({
+        where: {
+          id: userId,
+        },
+      })
+
+      if (!user) {
+        reply.status(404).send({ error: 'User not found' })
+        return
+      }
+
+      const project = await prisma.project.findUnique({
+        where: {
+          id: projectId,
+        },
+      })
+
+      if (!project || project.userId !== userId) {
+        reply
+          .status(404)
+          .send({ error: 'Project not found or does not belong to the user' })
+        return
+      }
+
       const newTodo = await prisma.todo.create({
         data: {
           title,
