@@ -6,7 +6,9 @@ import { TodoSchema } from '../../schemas/todo-schema.ts'
 export async function CreateTodo(server: FastifyInstance) {
   server.post('/todos', async (request, reply) => {
     try {
-      const { title, userId, projectId } = TodoSchema.parse(request.body)
+      const { title, userId, projectId, description } = TodoSchema.parse(
+        request.body,
+      )
 
       const user = await prisma.user.findUnique({
         where: {
@@ -34,9 +36,11 @@ export async function CreateTodo(server: FastifyInstance) {
 
       const newTodo = await prisma.todo.create({
         data: {
-          title,
-          userId,
-          projectId,
+          title: String(title),
+          userId: Number(userId),
+          projectId: Number(projectId),
+          description: String(description),
+          status: 'idle',
         },
       })
 
